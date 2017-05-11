@@ -1,0 +1,94 @@
+varnishtest "More VCL coverage"
+
+server s1 {
+	rxreq
+	txresp
+} -start
+
+varnish v1 -arg "-i J.F.Nobody" -vcl+backend {
+
+	import std;
+	import directors;
+
+	sub vcl_init {
+		new rr = directors.round_robin();
+		rr.add_backend(s1);
+	}
+
+	sub vcl_recv {
+		set client.identity = "Samuel B. Nobody";
+		set req.backend_hint = rr.backend();
+	}
+
+	sub vcl_deliver {
+		set resp.http.server_port = std.port(server.ip);
+		set resp.http.server_port_foo = std.port(server.ip) + "_foo";
+		set resp.http.ttl1 = (req.ttl + 10s);
+		set resp.http.ttl2 = req.ttl + 10s;
+		set resp.http.id = server.identity;
+		set resp.http.esi = req.esi;
+		set resp.http.be = req.backend_hint;
+		set resp.http.c_id = client.identity;
+		set resp.http.l_ip = local.ip;
+		set resp.http.r_ip = remote.ip;
+		if (obj.uncacheable) { }
+		set resp.http.o_age = obj.age;
+		set resp.http.o_ttl = obj.ttl;
+		set resp.http.o_grace = obj.grace;
+		set resp.http.o_keep = obj.keep;
+	}
+
+	sub vcl_backend_response {
+		set beresp.http.bereq_backend = bereq.backend;
+		set beresp.http.beresp_backend = beresp.backend;
+		set beresp.http.keep = beresp.keep;
+		set beresp.http.stv = beresp.storage;
+		set beresp.http.hint = beresp.storage_hint;
+		set beresp.http.be_ip = beresp.backend.ip;
+		set beresp.http.be_nm = beresp.backend.name;
+		set beresp.http.unc = bereq.uncacheable;
+		if (beresp.ttl > 3 s) {
+			set beresp.http.ttl = "long";
+		} else {
+			set beresp.http.ttl = "short";
+		}
+	}
+
+	sub vcl_hit {
+		if (obj.status != 200) { return(synth(700)); }
+		if (obj.proto) { }
+		if (obj.reason) { }
+		if (obj.keep > 1m) { }
+		if (obj.grace < 3m) {
+			return (deliver);
+		}
+		if (obj.ttl < 3m) {
+			return (deliver);
+		}
+	}
+
+	sub vcl_backend_fetch {
+		if (bereq.between_bytes_timeout < 10s) {
+			set bereq.http.quick = "please";
+		}
+		if (bereq.connect_timeout < 10s) {
+			set bereq.http.hello = "please";
+		}
+		set bereq.connect_timeout = 10s;
+	}
+
+} -start
+
+client c1 {
+	txreq
+	rxresp
+	expect resp.status == 200
+	expect resp.http.bereq_backend == "rr"
+	expect resp.http.beresp_backend == "s1"
+	expect resp.http.be_ip == "${localhost}"
+	expect resp.http.be_nm == "s1"
+	expect resp.http.be == "rr"
+
+	txreq
+	rxresp
+} -run

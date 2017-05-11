@@ -1,0 +1,72 @@
+varnishtest "Test std.duration()"
+
+server s1 {
+	rxreq
+	txresp
+} -start
+
+varnish v1 -vcl+backend {
+	import std;
+
+	sub vcl_deliver {
+		set resp.http.ttl = std.duration(req.http.ttl, 1s) + 1000000s;
+	}
+} -start
+
+client c1 {
+	txreq -hdr "ttl: 10ms"
+	rxresp
+	expect resp.http.ttl == 1000000.010
+
+	txreq -hdr "ttl: 10s"
+	rxresp
+	expect resp.http.ttl == 1000010.000
+
+	txreq -hdr "ttl: 10m"
+	rxresp
+	expect resp.http.ttl == 1000600.000
+
+	txreq -hdr "ttl: 10h"
+	rxresp
+	expect resp.http.ttl == 1036000.000
+
+	txreq -hdr "ttl: 10d"
+	rxresp
+	expect resp.http.ttl == 1864000.000
+
+	txreq -hdr "ttl: 10w"
+	rxresp
+	expect resp.http.ttl == 7048000.000
+
+	txreq -hdr "ttl: 1y"
+	rxresp
+	expect resp.http.ttl == 32536000.000
+
+	txreq -hdr "ttl: -100s"
+	rxresp
+	expect resp.http.ttl ==  999900.000
+
+	txreq -hdr "ttl: s"
+	rxresp
+	expect resp.http.ttl ==  1000001.000
+
+	txreq -hdr "ttl: 3wx"
+	rxresp
+	expect resp.http.ttl ==  1000001.000
+
+	txreq -hdr "ttl: -inf"
+	rxresp
+	expect resp.http.ttl ==  1000001.000
+
+	txreq -hdr "ttl: 2x"
+	rxresp
+	expect resp.http.ttl ==  1000001.000
+
+	txreq -hdr "ttl: 2h x"
+	rxresp
+	expect resp.http.ttl ==  1000001.000
+
+	txreq -hdr "ttl: 100"
+	rxresp
+	expect resp.http.ttl == 1000001.000
+} -run

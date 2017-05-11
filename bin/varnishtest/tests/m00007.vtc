@@ -1,0 +1,47 @@
+varnishtest "Test std.integer()"
+
+server s1 {
+	rxreq
+	txresp
+} -start
+
+varnish v1 -vcl+backend {
+	import std;
+
+	sub vcl_deliver {
+		set resp.http.gtzero = (std.integer(req.http.foo, 0) > 0);
+		set resp.http.ltzero = (std.integer(req.http.foo, 0) < 0);
+		set resp.http.iszero = (std.integer(req.http.foo, 0) == 0);
+		set resp.http.converted = std.integer(req.http.foo, 0);
+	}
+} -start
+
+client c1 {
+	txreq -hdr "foo: 1"
+	rxresp
+	expect resp.http.gtzero == true
+	expect resp.http.ltzero == false
+	expect resp.http.iszero == false
+	expect resp.http.converted == 1
+
+	txreq -hdr "foo: -1"
+	rxresp
+	expect resp.http.gtzero == false
+	expect resp.http.ltzero == true
+	expect resp.http.iszero == false
+	expect resp.http.converted == -1
+
+	txreq -hdr "foo: 0"
+	rxresp
+	expect resp.http.gtzero == false
+	expect resp.http.ltzero == false
+	expect resp.http.iszero == true
+	expect resp.http.converted == 0
+
+	txreq -hdr "foo: bar"
+	rxresp
+	expect resp.http.gtzero == false
+	expect resp.http.ltzero == false
+	expect resp.http.iszero == true
+	expect resp.http.converted == 0
+} -run

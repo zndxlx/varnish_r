@@ -1,0 +1,97 @@
+varnishtest "VCL compiler coverage test: vcc_xref.c vcc_var.c vcc_symb.c"
+
+varnish v1 -errvcl {Variable 'obj.ttl' is read only.} {
+	backend b { .host = "127.0.0.1"; }
+	sub vcl_recv { set obj.ttl = 1 w; }
+}
+
+varnish v1 -errvcl {Variable 'obj.ttl' is read only.} {
+	backend b { .host = "127.0.0.1"; }
+
+	sub foo { set obj.ttl = 1 w; }
+	sub vcl_recv { call foo ; }
+}
+
+varnish v1 -errvcl "Expected an action, 'if', '{' or '}'" {
+	backend b { .host = "127.0.0.1"; }
+
+	sub vcl_recv { discard; }
+}
+
+varnish v1 -errvcl "Expected an action, 'if', '{' or '}'" {
+	backend b { .host = "127.0.0.1"; }
+
+	sub foo { discard; }
+	sub vcl_recv { call foo; }
+}
+
+varnish v1 -errvcl "Function recurses on" {
+	backend b { .host = "127.0.0.1"; }
+
+	sub foo { call foo; }
+	sub vcl_recv { call foo; }
+}
+
+varnish v1 -errvcl "Function recurses on" {
+	backend b { .host = "127.0.0.1"; }
+
+	sub bar { call foo; }
+	sub foo { call bar; }
+	sub vcl_recv { call foo; }
+}
+
+varnish v1 -errvcl {Unused acl foo, defined:} {
+	backend b { .host = "127.0.0.1"; }
+
+	acl foo { "127.0.0.1"; }
+
+}
+
+varnish v1 -errvcl {Unused sub foo, defined:} {
+	backend b { .host = "127.0.0.1"; }
+
+	sub foo {
+	}
+}
+
+varnish v1 -errvcl {Unused sub none, defined:} {
+	backend b { .host = "127.0.0.1"; }
+
+	sub none {
+	}
+}
+
+varnish v1 -errvcl {Invalid return "deliver"} {
+	backend b { .host = "127.0.0.1"; }
+
+	sub vcl_recv {
+		call foo;
+	}
+
+	sub foo {
+		return (deliver);
+	}
+}
+
+varnish v1 -errvcl {HTTP header (buckinghambuckingham..) is too long.} {
+
+	backend foo { .host = "127.0.0.1"; }
+
+	sub vcl_deliver {
+		set resp.http.buckinghambuckinghambuckinghambuckinghambuckinghambuckinghambuckinghambuckinghambuckinghambuckinghambuckinghambuckinghambucking = "foobar";
+	}
+}
+
+varnish v1 -vcl {
+
+	backend foo { .host = "127.0.0.1"; }
+
+	sub vcl_deliver {
+		set resp.http.buckinghambuckinghambuckinghambuckinghambuckinghambuckinghambuckinghambuckinghambuckinghambuckinghambuckinghambuckinghambuckin = "foobar";
+	}
+}
+
+varnish v1 -errvcl {Unknown variable 'req.foobar'} {
+	backend foo { .host = "127.0.0.1"; }
+	sub vcl_recv { set req.foobar = 3; }
+}
