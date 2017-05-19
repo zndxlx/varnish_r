@@ -1,6 +1,6 @@
 /*-
  * Copyright (c) 2000-2008 Poul-Henning Kamp
- * Copyright (c) 2000-2008 Dag-Erling Coïdan Smørgrav
+ * Copyright (c) 2000-2008 Dag-Erling Co?dan Sm?rgrav
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -449,8 +449,8 @@ char *
 VSB_data(const struct vsb *s)
 {
 
-	assert_VSB_integrity(s);
-	assert_VSB_state(s, VSB_FINISHED);
+	assert_VSB_integrity(s);  //判断vsb结构正确性
+	assert_VSB_state(s, VSB_FINISHED);  
 
 	return (s->s_buf);
 }

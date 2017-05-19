@@ -61,7 +61,7 @@ mgt_sltm(const char *tag, const char *sdesc, const char *ldesc)
 
 /*lint -e{506} constant value boolean */
 void
-mgt_DumpRstVsl(void)
+mgt_DumpRstVsl(void)  //打印日志的格式
 {
 
 	printf(

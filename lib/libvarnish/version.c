@@ -3,7 +3,7 @@
  * Copyright (c) 2006-2015 Varnish Software AS
  * All rights reserved.
  *
- * Author: Dag-Erling Smørgrav <des@des.no>
+ * Author: Dag-Erling Sm?rgrav <des@des.no>
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -38,7 +38,7 @@
 
 const char *VCS_version =
     PACKAGE_TARNAME "-" PACKAGE_VERSION " revision " VCS_Version;
-
+//打印版本信息
 void
 VCS_Message(const char *progname)
 {

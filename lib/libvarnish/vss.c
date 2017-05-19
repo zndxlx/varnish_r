@@ -3,7 +3,7 @@
  * Copyright (c) 2006-2010 Varnish Software AS
  * All rights reserved.
  *
- * Author: Dag-Erling Smørgrav <des@des.no>
+ * Author: Dag-Erling Sm?rgrav <des@des.no>
  * Author: Cecilie Fritzvold <cecilihf@linpro.no>
  *
  * Redistribution and use in source and binary forms, with or without
@@ -60,7 +60,7 @@
  *
  * See also RFC5952
  */
-
+//解析地址和端口
 static const char *
 vss_parse(char *str, char **addr, char **port)
 {

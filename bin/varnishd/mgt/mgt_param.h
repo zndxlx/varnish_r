@@ -32,9 +32,9 @@ struct parspec;
 
 typedef int tweak_t(struct vsb *, const struct parspec *, const char *arg);
 
-struct parspec {
+struct parspec {   //参数信息结构
 	const char	*name;
-	tweak_t		*func;
+	tweak_t		*func;   //配置函数
 	volatile void	*priv;
 	const char	*min;
 	const char	*max;

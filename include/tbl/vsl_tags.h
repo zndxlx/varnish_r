@@ -43,7 +43,7 @@
  */
 
 /*lint -save -e525 -e539 */
-
+//日志的格式
 #define NODEF_NOTICE \
     "NB: This log record is masked by default.\n\n"
 

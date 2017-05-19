@@ -70,7 +70,7 @@ do {									\
 	}								\
 } while (0)
 
-/* Assert zero return value */
+/* Assert zero return value  AZ Assert zero  AN  Assert not zero*/ 
 #define AZ(foo)		do { assert((foo) == 0); } while (0)
 #define AN(foo)		do { assert((foo) != 0); } while (0)
 #define XXXAZ(foo)	do { xxxassert((foo) == 0); } while (0)

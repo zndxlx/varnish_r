@@ -1,6 +1,6 @@
 /*-
  * Copyright (c) 2000-2011 Poul-Henning Kamp
- * Copyright (c) 2000-2008 Dag-Erling Coïdan Smørgrav
+ * Copyright (c) 2000-2008 Dag-Erling Co?dan Sm?rgrav
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -34,7 +34,7 @@
 /*
  * Structure definition
  */
-struct vsb {
+struct vsb {  //Varnish Storage Buffer 
 	unsigned	magic;
 #define VSB_MAGIC	0x4a82dd8a
 	int		 s_error;	/* current error code */

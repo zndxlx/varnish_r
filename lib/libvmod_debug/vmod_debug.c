@@ -34,10 +34,10 @@
 
 #include "cache/cache.h"
 
-#include "vcl.h"
+#include "vcl.h" //Varnish Configure Language
 #include "vrt.h"
 #include "vsa.h"
-#include "vsb.h"
+#include "vsb.h"  //Varnish Storage Buffer
 #include "vtcp.h"
 #include "vtim.h"
 #include "vcc_if.h"

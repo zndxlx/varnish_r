@@ -77,7 +77,7 @@ int optreset;	// Some has it, some doesn't.  Cheaper than auto*
 /*--------------------------------------------------------------------*/
 
 static void
-usage(void)
+usage(void)  //启动参数帮助信息
 {
 #define FMT "  %-28s # %s\n"
 
@@ -255,15 +255,15 @@ init_params(struct cli *cli)
 
 	if (sizeof(void *) < 8) {		/*lint !e506 !e774  */
 		/*
-		 * Adjust default parameters for 32 bit systems to conserve
+		 * Adjust default parameters for 32 bit systems to conserve  32位系统参数需要调整
 		 * VM space.
-		 */
+		 */ 
 		MCF_ParamConf(MCF_DEFAULT, "workspace_client", "24k");
 		MCF_ParamConf(MCF_DEFAULT, "workspace_backend", "16k");
 		MCF_ParamConf(MCF_DEFAULT, "http_resp_size", "8k");
 		MCF_ParamConf(MCF_DEFAULT, "http_req_size", "12k");
 		MCF_ParamConf(MCF_DEFAULT, "gzip_buffer", "4k");
-		MCF_ParamConf(MCF_MAXIMUM, "vsl_space", "1G");
+		MCF_ParamConf(MCF_MAXIMUM, "vsl_space", "1G");  //设置日志空间
 		MCF_ParamConf(MCF_MAXIMUM, "vsm_space", "1G");
 	}
 
@@ -288,7 +288,7 @@ init_params(struct cli *cli)
 /*--------------------------------------------------------------------*/
 
 static void
-identify(const char *i_arg)
+identify(const char *i_arg)  //打开了syslog   i_arg,日志前缀
 {
 	char id[17], *p;
 	int i;
@@ -351,13 +351,13 @@ static void
 mgt_x_arg(const char *x_arg)
 {
 	if (!strcmp(x_arg, "parameter"))
-		MCF_DumpRstParam();
+		MCF_DumpRstParam();   //查看parameter帮助
 	else if (!strcmp(x_arg, "vsl"))
-		mgt_DumpRstVsl();
+		mgt_DumpRstVsl();     //查看vsl(日志)帮助 
 	else if (!strcmp(x_arg, "cli"))
-		mgt_DumpRstCli();
+		mgt_DumpRstCli();     //查看cli帮助
 	else if (!strcmp(x_arg, "builtin"))
-		mgt_DumpBuiltin();
+		mgt_DumpBuiltin();    //查看默认vcl文件
 	else
 		ARGV_ERR("Invalid -x argument\n");
 }
@@ -379,7 +379,7 @@ mgt_eric(void)
 	case -1:
 		fprintf(stderr, "Fork() failed: %s\n", strerror(errno));
 		exit(-1);
-	case 0:
+	case 0:   
 		closefd(&eric_pipes[0]);
 		assert(setsid() > 1);
 
@@ -500,7 +500,7 @@ main(int argc, char * const *argv)
 	struct vsb *vsb;
 	VTAILQ_HEAD(,f_arg) f_args = VTAILQ_HEAD_INITIALIZER(f_args);
 
-	setbuf(stdout, NULL);
+	setbuf(stdout, NULL);  //设置标准输出没有缓存区
 	setbuf(stderr, NULL);
 
 	mgt_tests();
@@ -511,12 +511,12 @@ main(int argc, char * const *argv)
 
 	o = getopt(argc, argv, opt_spec);
 	switch (o) {
-	case 'x':
+	case 'x':   //查看帮助
 		if (argc != 3)
 			ARGV_ERR("Too many arguments for -x\n");
 		mgt_x_arg(optarg);
 		exit(0);
-	case 'V':
+	case 'V':  //打印版本
 		if (argc != 2)
 			ARGV_ERR("Too many arguments for -V\n");
 		VCS_Message("varnishd");
@@ -586,8 +586,8 @@ main(int argc, char * const *argv)
 	 * Start out by closing all unwanted file descriptors we might
 	 * have inherited from sloppy process control daemons.
 	 */
-	VSUB_closefrom(STDERR_FILENO + 1);
-	MCH_TrackHighFd(STDERR_FILENO);
+	VSUB_closefrom(STDERR_FILENO + 1); //关闭了描述符
+	MCH_TrackHighFd(STDERR_FILENO);  //更新最大文件描述符
 
 	/*
 	 * Have Eric Daemonize us if need be
@@ -771,7 +771,7 @@ main(int argc, char * const *argv)
 		ARGV_ERR("Invalid instance (-n) name: %s\n", strerror(errno));
 
 #ifdef HAVE_SETPROCTITLE
-	setproctitle("Varnish-Mgr %s", heritage.name);
+	setproctitle("Varnish-Mgr %s", heritage.name);  //修改进程名称
 #endif
 
 	identify(i_arg);

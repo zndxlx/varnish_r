@@ -40,7 +40,7 @@
 	"\tmax_pool\tmaximum size of free pool.\n"			\
 	"\tmax_age\tmax age of free element."
 
-struct parspec mgt_parspec[] = {
+struct parspec mgt_parspec[] = {  //参数配置列表
 #define PARAM(nm, ty, mi, ma, de, un, fl, st, lt, fn)		\
 	{ #nm, tweak_##ty, &mgt_param.nm, mi, ma, st, fl, de, un },
 #include "tbl/params.h"

@@ -75,7 +75,7 @@ tcp_keep_probes(void)
 	tcp_probe(s, TCP_KEEPIDLE, "tcp_keepalive_time",	600);
 	tcp_probe(s, TCP_KEEPCNT, "tcp_keepalive_probes",	5);
 	tcp_probe(s, TCP_KEEPINTVL, "tcp_keepalive_intvl",	5);
-	closefd(&s);
+	closefd(&s);  //为什么又关闭
 }
 #endif
 

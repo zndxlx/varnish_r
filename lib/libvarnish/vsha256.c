@@ -25,7 +25,7 @@
  *
  * From: $FreeBSD: head/lib/libmd/sha256c.c 154479 2006-01-17 15:35:57Z phk $
  */
-
+//sha 算法接口
 #include "config.h"
 
 #if defined(HAVE_SYS_ENDIAN_H)

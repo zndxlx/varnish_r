@@ -119,7 +119,7 @@ mcf_findpar(const char *name)
 }
 
 static void
-mcf_addpar(struct parspec *ps)
+mcf_addpar(struct parspec *ps) //将ps 添加到phead链表中
 {
 	struct plist *pl, *pl2;
 	int i;
@@ -434,7 +434,7 @@ MCF_AddParams(struct parspec *ps)
 /*--------------------------------------------------------------------
  * Wash a min/max/default value
  */
-
+//清除参数配置
 static void
 mcf_wash_param(struct cli *cli, const struct parspec *pp, const char **val,
     const char *name, struct vsb *vsb)
@@ -508,11 +508,11 @@ MCF_CollectParams(void)
 
 	MCF_AddParams(mgt_parspec);
 	MCF_AddParams(WRK_parspec);
-	MCF_AddParams(VSL_parspec);
+	MCF_AddParams(VSL_parspec);  
 }
 
 /*--------------------------------------------------------------------*/
-
+// 参数值设置
 void
 MCF_ParamConf(enum mcf_which_e which, const char *param, const char *fmt, ...)
 {
@@ -548,7 +548,7 @@ MCF_ParamConf(enum mcf_which_e which, const char *param, const char *fmt, ...)
 /*--------------------------------------------------------------------*/
 
 void
-MCF_DumpRstParam(void)
+MCF_DumpRstParam(void)  //打印参数列表信息phead，parspec
 {
 	struct plist *pl;
 	const struct parspec *pp;

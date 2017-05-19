@@ -216,7 +216,7 @@ VTCP_fastopen(int sock, int depth)
  * which mucks about a bit before it ends up calling ioctl(FIONBIO),
  * at least on FreeBSD.
  */
-
+//设置socket阻塞
 int
 VTCP_blocking(int sock)
 {
@@ -227,7 +227,7 @@ VTCP_blocking(int sock)
 	VTCP_Assert(j);
 	return (j);
 }
-
+//设置socket非阻塞
 int
 VTCP_nonblocking(int sock)
 {
@@ -517,7 +517,7 @@ VTCP_listen_on(const char *addr, const char *def_port, int depth,
 
 	h.depth = depth;
 	h.errp = errp;
-
+    //传递了函数指针vtcp_lo_cb，可能监听多个地址
 	sock = VSS_resolver(addr, def_port, vtcp_lo_cb, &h, errp);
 	if (*errp != NULL)
 		return (-1);
@@ -544,7 +544,7 @@ VTCP_linger(int sock, int linger)
 /*--------------------------------------------------------------------
  * Do a poll to check for remote HUP
  */
-
+//检查远端是否关闭
 int
 VTCP_check_hup(int sock)
 {
@@ -563,7 +563,7 @@ VTCP_check_hup(int sock)
 /*--------------------------------------------------------------------
  * Check if a TCP syscall return value is fatal
  */
-
+//判断返回值是否是致命的
 int
 VTCP_Check(int a)
 {
@@ -586,7 +586,7 @@ VTCP_Check(int a)
 /*--------------------------------------------------------------------
  *
  */
-
+//fd 读数据
 int
 VTCP_read(int fd, void *ptr, size_t len, double tmo)
 {

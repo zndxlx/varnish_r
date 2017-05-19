@@ -30,7 +30,7 @@
 
 /* from libvarnish/vtim.c */
 #define VTIM_FORMAT_SIZE 30
-void VTIM_format(double t, char *p);
+void VTIM_format(double t, char *p);   //时间解析函数
 double VTIM_parse(const char *p);
 double VTIM_mono(void);
 double VTIM_real(void);

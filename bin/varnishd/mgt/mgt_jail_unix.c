@@ -68,7 +68,7 @@ static int vju_cc_gid_set;
 #ifndef NGID
 #define NGID 2000
 #endif
-
+//限制进程权限
 static int
 vju_getuid(const char *arg)
 {
