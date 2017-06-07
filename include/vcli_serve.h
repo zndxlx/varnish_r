@@ -30,7 +30,7 @@
  *
  * XXX: at a latter date we may want to move some to cli.h/libvarnishapi
  */
-
+//控制台处理
 #include "vcli.h"
 
 struct cli;	/* NB: struct cli is opaque at this level.  */

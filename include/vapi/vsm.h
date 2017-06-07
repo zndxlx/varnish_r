@@ -32,6 +32,8 @@
  * The VSM "class" acts as parent class for the VSL and VSC subclasses.
  *
  */
+ //Shared Memory Logging and Statistics
+ // statistics counters (VSC)
 
 #ifndef VAPI_VSM_H_INCLUDED
 #define VAPI_VSM_H_INCLUDED

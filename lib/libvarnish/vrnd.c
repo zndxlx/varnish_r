@@ -4,7 +4,7 @@
  * Copyright (c) 1983, 1993 The Regents of the University of California.
  * All rights reserved.
  *
- * Author: Dag-Erling Smørgrav <des@des.no>
+ * Author: Dag-Erling Sm?rgrav <des@des.no>
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -48,6 +48,7 @@
  * Stripped down random(3) implementation from FreeBSD, to provide
  * predicatable "random" numbers of testing purposes.
  */
+ //随机数获取实现
 
 #define	TYPE_3		3		/* x**31 + x**3 + 1 */
 #define	DEG_3		31

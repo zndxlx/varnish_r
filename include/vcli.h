@@ -38,7 +38,7 @@
 /*
  * Status/return codes in the CLI protocol
  */
-
+//控制台处理
 enum VCLI_status_e {
 	CLIS_SYNTAX	= 100,
 	CLIS_UNKNOWN	= 101,

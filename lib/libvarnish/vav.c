@@ -35,7 +35,7 @@
  *	Free the result of VAV_Parse()
  *
  */
-
+//命令行参数处理  VAV_Parse
 #include "config.h"
 
 #include <ctype.h>

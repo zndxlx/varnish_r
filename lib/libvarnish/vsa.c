@@ -161,7 +161,7 @@
  * variant definition of IPv6 addresses between kernel and userland.
  *
  */
-
+//网络地址处理函数
 struct suckaddr {
 	unsigned			magic;
 #define SUCKADDR_MAGIC			0x4b1e9335

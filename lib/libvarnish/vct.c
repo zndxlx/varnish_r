@@ -35,7 +35,7 @@
 #include "vct.h"
 
 /* NB: VCT always operate in ASCII, don't replace 0x0d with \r etc. */
-
+//字符类型判断
 #define VCT_UPALPHA	VCT_ALPHA
 #define VCT_LOALPHA	VCT_ALPHA
 

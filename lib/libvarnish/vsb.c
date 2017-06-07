@@ -27,6 +27,8 @@
 __FBSDID("$FreeBSD: head/sys/kern/subr_vsb.c 222004 2011-05-17 06:36:32Z phk $")
  */
 
+//vsb Varnish Storage Buffer  内存管理
+
 #include "config.h"
 
 #include <ctype.h>
@@ -497,7 +499,7 @@ VSB_destroy(struct vsb **s)
 }
 
 /*
- * Quote a string
+ * Quote a string  什么用的lixin
  */
 void
 VSB_quote_pfx(struct vsb *s, const char *pfx, const void *v, int len, int how)

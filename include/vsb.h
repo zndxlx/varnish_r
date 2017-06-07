@@ -48,7 +48,7 @@ struct vsb {  //Varnish Storage Buffer
 #define	VSB_FINISHED	0x00020000	/* set by VSB_finish() */
 #define	VSB_DYNSTRUCT	0x00080000	/* vsb must be freed */
 	int		 s_flags;	/* flags */
-	int		 s_indent;	/* Ident level */
+	int		 s_indent;	/* Ident level */  做什么用的???
 };
 
 #ifdef __cplusplus

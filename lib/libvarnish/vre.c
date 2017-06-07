@@ -26,6 +26,7 @@
  * SUCH DAMAGE.
  */
 
+//正则表达式实现
 #include "config.h"
 
 #include <pcre.h>

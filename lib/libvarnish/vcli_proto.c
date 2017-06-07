@@ -67,7 +67,7 @@ VCLI_AuthResponse(int S_fd, const char *challenge,
 	for (i = 0; i < SHA256_LEN; i++)
 		assert(snprintf(response + 2 * i, 3, "%02x", buf[i]) == 2);
 }
-
+//fd中写错误
 int
 VCLI_WriteResult(int fd, unsigned status, const char *result)
 {
@@ -138,7 +138,7 @@ read_tmo(int fd, char *ptr, unsigned len, double tmo)
 	}
 	return (j);
 }
-
+//fd中读取错误
 int
 VCLI_ReadResult(int fd, unsigned *status, char **ptr, double tmo)
 {

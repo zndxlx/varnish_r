@@ -43,7 +43,7 @@
 #include "vas.h"	// XXX Flexelint "not used" - but req'ed for assert()
 #include "vfl.h"
 #include "vpf.h"
-
+//文件处理函数
 struct vpf_fh {
 	int	pf_fd;
 	char	pf_path[MAXPATHLEN + 1];

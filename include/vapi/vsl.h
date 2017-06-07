@@ -30,7 +30,7 @@
  * This is the public API for the VSL access.
  *
  */
-
+//共享内存日志
 #ifndef VAPI_VSL_H_INCLUDED
 #define VAPI_VSL_H_INCLUDED
 

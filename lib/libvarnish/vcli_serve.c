@@ -69,7 +69,7 @@ struct VCLS_fd {
 struct VCLS {
 	unsigned			magic;
 #define VCLS_MAGIC			0x60f044a3
-	VTAILQ_HEAD(,VCLS_fd)		fds;
+	VTAILQ_HEAD(,VCLS_fd)		fds;  //VCLS_fd也包含VCLS
 	unsigned			nfd;
 	VTAILQ_HEAD(,cli_proto)		funcs;
 	cls_cbc_f			*before, *after;
@@ -621,7 +621,7 @@ VCLS_Destroy(struct VCLS **csp)
 }
 
 /**********************************************************************
- * Utility functions for implementing CLI commands
+ * Utility functions for implementing CLI commands, 写数据
  */
 
 /*lint -e{818} cli could be const */
