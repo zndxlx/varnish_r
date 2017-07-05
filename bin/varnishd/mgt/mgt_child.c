@@ -321,7 +321,7 @@ mgt_launch_child(struct cli *cli)
 		perror("Could not fork child");
 		exit(1);
 	}
-	if (pid == 0) {
+	if (pid == 0) {  //子进程特别处理
 
 		/* Redirect stdin/out/err */
 		VFIL_null_fd(STDIN_FILENO);

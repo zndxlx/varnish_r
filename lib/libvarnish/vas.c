@@ -37,7 +37,7 @@
 #include <string.h>
 
 #include "vas.h"
-
+//出错退出时候的处理函数
 static void __attribute__((__noreturn__))
 VAS_Fail_default(const char *func, const char *file, int line,
     const char *cond, enum vas_e kind)

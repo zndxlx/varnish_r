@@ -30,9 +30,9 @@
 
 #ifndef VSB_H_INCLUDED
 #define VSB_H_INCLUDED
-
+//内存管理
 /*
- * Structure definition
+ * Structure definition  
  */
 struct vsb {  //Varnish Storage Buffer 
 	unsigned	magic;

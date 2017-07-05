@@ -77,7 +77,7 @@ struct cli {
 	unsigned                auth;
 	char                    challenge[34];
 	char                    *ident;
-	struct vlu              *vlu;
+	struct vlu              *vlu;  //接受到cli消息后会在这处理
 	struct VCLS             *cls;
 	volatile unsigned       *limit;
 };

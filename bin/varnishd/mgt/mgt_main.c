@@ -60,9 +60,9 @@
 #include "waiter/mgt_waiter.h"
 
 struct heritage		heritage;
-unsigned		d_flag = 0;
+unsigned		d_flag = 0;  //是否测试模式
 pid_t			mgt_pid;
-struct vev_base		*mgt_evb;
+struct vev_base		*mgt_evb;  //异步事件处理
 int			exit_status = 0;
 struct vsb		*vident;
 struct VSC_C_mgt	static_VSC_C_mgt;
@@ -839,7 +839,7 @@ main(int argc, char * const *argv)
 	if (M_arg != NULL)
 		mgt_cli_master(M_arg);
 	if (T_arg != NULL)
-		mgt_cli_telnet(T_arg);
+		mgt_cli_telnet(T_arg);   //启动控制台cli
 
 	AZ(VSB_finish(vident));
 
@@ -883,7 +883,7 @@ main(int argc, char * const *argv)
 		MGT_Complain(C_ERR, "No VCL loaded yet");
 
 	if (mgt_has_vcl() && ! d_flag)
-		u = MCH_Start_Child();
+		u = MCH_Start_Child();  //启动子进程(关键)
 	else
 		u = 0;
 

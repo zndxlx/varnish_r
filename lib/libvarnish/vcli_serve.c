@@ -285,7 +285,7 @@ cls_vlu2(void *priv, char * const *av)
 		VTAILQ_FOREACH(clp, &cs->funcs, list) {
 			if (clp->auth > cli->auth)
 				continue;
-			if (!strcmp(clp->desc->request, av[1])) {
+			if (!strcmp(clp->desc->request, av[1])) {  //根据描述判断请求类型
 				cls_dispatch(cli, clp, av, na);
 				break;
 			}
@@ -466,6 +466,8 @@ cls_close_fd(struct VCLS *cs, struct VCLS_fd *cfd)
 	FREE_OBJ(cfd);
 }
 
+
+//增加控制台命令处理
 void
 VCLS_AddFunc(struct VCLS *cs, unsigned auth, struct cli_proto *clp)
 {

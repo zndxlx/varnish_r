@@ -36,7 +36,7 @@
  *	int		minimum_arguments
  *	int		maximum_arguments
  */
-
+//控制台命令描述 打印提示时候用
 /*lint -save -e525 -e539 */
 
 CLI_CMD(BAN,

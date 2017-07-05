@@ -32,7 +32,7 @@
  */
 
 /* Public Interface --------------------------------------------------*/
-
+//二叉堆接口
 struct binheap;
 
 typedef int binheap_cmp_t(void *priv, const void *a, const void *b);

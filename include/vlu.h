@@ -24,7 +24,7 @@
  * SUCH DAMAGE.
  *
  * Functions for assembling a bytestream into text-lines and calling
- * a function on each.
+ * a function on each.  将一个流转换成行，并对每行处理
  */
 
 #ifndef VLU_H_INCLUDED

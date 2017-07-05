@@ -385,12 +385,12 @@ mgt_cli_callback2(const struct vev *e, int what)
 
 	(void)e;
 	(void)what;
-	i = VCLS_PollFd(mgt_cls, e->fd, 0);
+	i = VCLS_PollFd(mgt_cls, e->fd, 0);  //有事件时候poll mgt_cls
 	return (i);
 }
 
 /*--------------------------------------------------------------------*/
-
+//当客户端连接到cli后控制台连接处理
 void
 mgt_cli_setup(int fdi, int fdo, int auth, const char *ident,
     mgt_cli_close_f *closefunc, void *priv)
@@ -471,6 +471,7 @@ telnet_new(int fd)
 	return (tn);
 }
 
+//处理cli连接
 static int
 telnet_accept(const struct vev *ev, int what)
 {
@@ -526,6 +527,7 @@ mgt_cli_secret(const char *S_arg)
 	secret_file = S_arg;
 }
 
+//对cli监听地址解析后的处理 1、listen  2、telnet_accept处理连接
 static int __match_proto__(vss_resolved_f)
 mct_callback(void *priv, const struct suckaddr *sa)
 {
