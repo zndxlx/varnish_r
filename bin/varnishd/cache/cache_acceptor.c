@@ -61,8 +61,8 @@ struct wrk_accept {
 	/* Accept stuff */
 	struct sockaddr_storage	acceptaddr;
 	socklen_t		acceptaddrlen;
-	int			acceptsock;
-	struct listen_sock	*acceptlsock;
+	int			acceptsock;  //接收sock
+	struct listen_sock	*acceptlsock;  //监听sock
 };
 
 struct poolsock {
@@ -386,7 +386,7 @@ vca_make_session(struct worker *wrk, void *arg)
  * we do so, otherwise we put the socket back on the "BACK" pool
  * and handle the new connection ourselves.
  */
-
+//接受一个连接
 static void __match_proto__(task_func_t)
 vca_accept_task(struct worker *wrk, void *arg)
 {
@@ -513,7 +513,7 @@ VCA_DestroyPool(struct pool *pp)
 }
 
 /*--------------------------------------------------------------------*/
-
+//开始监听http服务地址
 static void *
 vca_acct(void *arg)
 {
@@ -536,7 +536,7 @@ vca_acct(void *arg)
 				    "Kernel TCP Fast Open: sock=%d, ret=%d %s",
 				    ls->sock, i, strerror(errno));
 		}
-		AZ(listen(ls->sock, cache_param->listen_depth));
+		AZ(listen(ls->sock, cache_param->listen_depth)); //开始监听
 		vca_tcp_opt_set(ls->sock, 1);
 		if (cache_param->accept_filter) {
 			int i;

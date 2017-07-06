@@ -31,7 +31,7 @@
  */
 
 /*lint -save -e525 -e539 */
-
+//定义http 请求 统计字段  struct acct_req 
 ACCT(req_hdrbytes)
 ACCT(req_bodybytes)
 ACCT(resp_hdrbytes)

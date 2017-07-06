@@ -41,7 +41,7 @@
  *
  * Public interfaces
  */
-
+//事件监听实现
 struct waited;
 struct waiter;
 
@@ -54,7 +54,7 @@ enum wait_event {
 
 typedef void waiter_handle_f(struct waited *, enum wait_event, double now);
 
-struct waited {
+struct waited {  //添加事件的参数
 	unsigned		magic;
 #define WAITED_MAGIC		0x1743992d
 	int			fd;

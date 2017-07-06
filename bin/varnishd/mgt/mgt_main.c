@@ -263,7 +263,7 @@ init_params(struct cli *cli)
 		MCF_ParamConf(MCF_DEFAULT, "http_resp_size", "8k");
 		MCF_ParamConf(MCF_DEFAULT, "http_req_size", "12k");
 		MCF_ParamConf(MCF_DEFAULT, "gzip_buffer", "4k");
-		MCF_ParamConf(MCF_MAXIMUM, "vsl_space", "1G");  //设置日志空间
+		MCF_ParamConf(MCF_MAXIMUM, "vsl_space", "1G");  //设置日志空间大小
 		MCF_ParamConf(MCF_MAXIMUM, "vsm_space", "1G");
 	}
 
@@ -716,7 +716,7 @@ main(int argc, char * const *argv)
 			break;
 		case 's':
 			s_arg_given = 1;
-			STV_Config(optarg);
+			STV_Config(optarg);  //存储配置
 			break;
 		case 'T':
 			if (!strcmp(optarg, "none"))

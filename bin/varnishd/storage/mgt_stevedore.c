@@ -2,7 +2,7 @@
  * Copyright (c) 2007-2011 Varnish Software AS
  * All rights reserved.
  *
- * Author: Dag-Erling Smørgav <des@des.no>
+ * Author: Dag-Erling Sm?rgav <des@des.no>
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -43,7 +43,7 @@
 
 #include "storage/storage.h"
 #include "vav.h"
-
+//存储管理
 static VTAILQ_HEAD(, stevedore) stevedores =
     VTAILQ_HEAD_INITIALIZER(stevedores);
 
@@ -159,7 +159,7 @@ STV_Config(const char *spec)
 	for (ac = 0; av[ac + 2] != NULL; ac++)
 		continue;
 
-	stv2 = MGT_Pick(STV_choice, av[1], "storage");
+	stv2 = MGT_Pick(STV_choice, av[1], "storage");  //选择缓存类型
 	AN(stv2);
 
 	/* Append strategy to ident string */

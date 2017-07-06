@@ -66,8 +66,7 @@ struct heritage {
 	int				std_fd;
 
 	/* Sockets from which to accept connections */
-	struct listen_sock_head		socks;
-
+	struct listen_sock_head		socks;   //http服务地址(重要)
 	/* Hash method */
 	const struct hash_slinger	*hash;
 

@@ -262,7 +262,7 @@ VBT_Recycle(const struct worker *wrk, struct tcp_pool *tp, struct vbc **vbcp)
 	vbc->state = VBC_STATE_AVAIL;
 	vbc->waited->func = tcp_handle;
 	vbc->waited->tmo = &cache_param->backend_idle_timeout;
-	if (Wait_Enter(wrk->pool->waiter, vbc->waited)) {
+	if (Wait_Enter(wrk->pool->waiter, vbc->waited)) {  //添加到事件监听
 		VTCP_close(&vbc->fd);
 		memset(vbc, 0x33, sizeof *vbc);
 		free(vbc);

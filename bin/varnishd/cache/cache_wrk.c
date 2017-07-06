@@ -351,7 +351,7 @@ Pool_Work_Thread(struct pool *pp, struct worker *wrk)
 			pp->nidle++;
 			do {
 				i = Lck_CondWait(&wrk->cond, &pp->mtx,
-				    wrk->vcl == NULL ?  0 : wrk->lastused+60.);
+				    wrk->vcl == NULL ?  0 : wrk->lastused+60.);  //等待信号量通知
 				if (i == ETIMEDOUT)
 					VCL_Rel(&wrk->vcl);
 			} while (wrk->task.func == NULL);

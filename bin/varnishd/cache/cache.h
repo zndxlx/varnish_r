@@ -325,7 +325,7 @@ struct worker {
 
 	struct v1l		*v1l;
 
-	pthread_cond_t		cond;
+	pthread_cond_t		cond;  //通知信号量
 
 	struct vcl		*vcl;
 
@@ -598,7 +598,7 @@ struct req {
 #define RES_PIPE		(1<<7)
 
 	/* Transaction VSL buffer */
-	struct vsl_log		vsl[1];
+	struct vsl_log		vsl[1]; //日志
 
 	/* Temporary accounting */
 	struct acct_req		acct;

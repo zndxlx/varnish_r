@@ -3,7 +3,7 @@
  * Copyright (c) 2006-2015 Varnish Software AS
  * All rights reserved.
  *
- * Author: Dag-Erling Smørgrav <des@des.no>
+ * Author: Dag-Erling Sm?rgrav <des@des.no>
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -690,7 +690,7 @@ void
 PAN_Init(void)
 {
 
-	VAS_Fail = pan_ic;
+	VAS_Fail = pan_ic;  //日志打印函数
 	pan_vsb = &pan_vsb_storage;
 	AN(heritage.panic_str);
 	AN(heritage.panic_str_len);

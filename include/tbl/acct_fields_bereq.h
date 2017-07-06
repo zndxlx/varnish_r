@@ -30,6 +30,7 @@
  */
 
 /*lint -save -e525 -e539 */
+//定义http be请求 统计字段  struct acct_bereq 
 
 ACCT(bereq_hdrbytes)
 ACCT(bereq_bodybytes)
