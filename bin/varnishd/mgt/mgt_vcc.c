@@ -26,7 +26,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  *
- * VCL compiler stuff
+ * VCL compiler stuff  编译vcl文件
  */
 
 #include "config.h"
@@ -112,7 +112,7 @@ run_vcc(void *priv)
 	STV_Foreach(stv)
 		VCC_Predef(vcc, "VCL_STEVEDORE", stv->ident);
 	mgt_vcl_export_labels(vcc);
-	csrc = VCC_Compile(vcc, &sb, vp->vclsrc, vp->vclsrcfile);
+	csrc = VCC_Compile(vcc, &sb, vp->vclsrc, vp->vclsrcfile); //csrc保存编译结果
 	AZ(VSB_finish(sb));
 	if (VSB_len(sb))
 		printf("%s", VSB_data(sb));
@@ -120,7 +120,7 @@ run_vcc(void *priv)
 	if (csrc == NULL)
 		exit(2);
 
-	fd = open(VGC_SRC, O_WRONLY|O_TRUNC|O_CREAT, 0600);
+	fd = open(VGC_SRC, O_WRONLY|O_TRUNC|O_CREAT, 0600);  //编译结果写入VGC_SRC
 	if (fd < 0) {
 		fprintf(stderr, "VCC cannot open %s", vp->csrcfile);
 		exit(2);
@@ -137,7 +137,7 @@ run_vcc(void *priv)
 }
 
 /*--------------------------------------------------------------------
- * Invoke system C compiler in a sub-process
+ * Invoke system C compiler in a sub-process 编译vcc生成的c文件
  */
 
 static void __match_proto__(vsub_func_f)
@@ -189,7 +189,7 @@ run_cc(void *priv)
 }
 
 /*--------------------------------------------------------------------
- * Attempt to open compiled VCL in a sub-process
+ * Attempt to open compiled VCL in a sub-process  打开动态文件
  */
 
 static void __match_proto__(vsub_func_f)
@@ -227,7 +227,7 @@ mgt_vcc_touchfile(const char *fn, struct vsb *sb)
 }
 
 /*--------------------------------------------------------------------
- * Compile a VCL program, return shared object, errors in sb.
+ * Compile a VCL program, return shared object, errors in sb. 编译一个vcl文件
  */
 
 static unsigned

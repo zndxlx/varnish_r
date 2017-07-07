@@ -54,7 +54,7 @@
  *
  * It can be extracted post-mortem from a core dump using gdb:
  *
- * (gdb) printf "%s", panicstr
+ * (gdb) printf "%s", panicstr   打印错误信息
  */
 
 static struct vsb pan_vsb_storage, *pan_vsb;

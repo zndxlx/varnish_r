@@ -859,7 +859,7 @@ mgt_vcl_poker(const struct vev *e, int what)
 }
 
 /*--------------------------------------------------------------------*/
-
+//vcl加载相关命令
 static struct cli_proto cli_vcl[] = {
 	{ CLICMD_VCL_LOAD,		"", mcf_vcl_load },
 	{ CLICMD_VCL_INLINE,		"", mcf_vcl_inline },

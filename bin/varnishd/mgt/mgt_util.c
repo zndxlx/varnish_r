@@ -104,6 +104,7 @@ const char C_DEBUG[] = "Debug:";
 const char C_SECURITY[] = "Security:";
 const char C_CLI[] = "Cli:";
 
+//打印syslog日志
 void
 MGT_Complain(const char *loud, const char *fmt, ...)
 {

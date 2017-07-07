@@ -200,7 +200,7 @@ child_malloc_fail(void *p, const char *s)
 	WRONG("Malloc Error");
 }
 #endif
-//子进程主函数
+//cache进程主函数
 void
 child_main(void)  
 {

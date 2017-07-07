@@ -664,9 +664,9 @@ mch_cli_server_status(struct cli *cli, const char * const *av, void *priv)
 	(void)priv;
 	VCLI_Out(cli, "Child in state %s", ch_state[child_state]);
 }
-
+//cli_cmds.h
 static struct cli_proto cli_mch[] = {
-	{ CLICMD_SERVER_STATUS,		"", mch_cli_server_status },
+	{ CLICMD_SERVER_STATUS,		"", mch_cli_server_status }, 
 	{ CLICMD_SERVER_START,		"", mch_cli_server_start },
 	{ CLICMD_SERVER_STOP,		"", mch_cli_server_stop },
 	{ CLICMD_PANIC_SHOW,		"", mch_cli_panic_show },

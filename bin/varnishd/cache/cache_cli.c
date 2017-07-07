@@ -86,7 +86,7 @@ cli_cb_after(const struct cli *cli)
 	ASSERT_CLI();
 	Lck_Unlock(&cli_mtx);
 	VSL(SLT_CLI, 0, "Wr %03u %zd %s",
-	    cli->result, VSB_len(cli->sb), VSB_data(cli->sb));
+	    cli->result, VSB_len(cli->sb), VSB_data(cli->sb));  //vsl 发送响应给主进程
 }
 
 void

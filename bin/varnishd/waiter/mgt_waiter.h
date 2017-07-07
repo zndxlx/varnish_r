@@ -32,7 +32,7 @@
 struct waiter_impl;
 
 /* mgt_waiter.c */
-extern struct waiter_impl const * waiter;
+extern struct waiter_impl const * waiter;  //全局的变量,要区分结构waiter
 
 #define WAITER(nm) extern const struct waiter_impl waiter_##nm;
 #include "tbl/waiters.h"
