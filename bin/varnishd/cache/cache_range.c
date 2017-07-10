@@ -39,7 +39,7 @@
 struct vrg_priv {
 	unsigned		magic;
 #define VRG_PRIV_MAGIC		0xb886e711
-	ssize_t			range_low;
+	ssize_t			range_low;  //支持rang low-high
 	ssize_t			range_high;
 	ssize_t			range_off;
 };

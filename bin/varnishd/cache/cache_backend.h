@@ -62,7 +62,7 @@ struct backend {
 	char			*display_name;
 
 
-	struct vbp_target	*probe;
+	struct vbp_target	*probe;  //后端探测
 	unsigned		healthy;
 	const char		*admin_health;
 	double			health_changed;

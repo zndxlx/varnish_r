@@ -302,7 +302,7 @@ enum task_prio {
 	TASK_QUEUE_BO,
 #define TASK_QUEUE_RESERVE	TASK_QUEUE_BO
 	TASK_QUEUE_REQ,
-	TASK_QUEUE_VCA,
+	TASK_QUEUE_VCA,  //vca varnish cache accept
 	TASK_QUEUE_END
 };
 
@@ -517,9 +517,9 @@ struct req {
 	unsigned		magic;
 #define REQ_MAGIC		0x2751aaa1
 
-	enum req_step		req_step;
+	enum req_step		req_step;  //tbl/steps.h
 	volatile enum req_body_state_e	req_body_status;
-	enum sess_close		doclose;
+	enum sess_close		doclose;  //关闭原因
 	int			restarts;
 	int			esi_level;
 	struct req		*top;	/* esi_level == 0 request */

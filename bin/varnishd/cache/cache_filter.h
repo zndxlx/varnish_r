@@ -105,7 +105,7 @@ struct vdp_entry {
 	void			*priv;
 	const char		*id;
 	VTAILQ_ENTRY(vdp_entry)	list;
-};
+};  //数据管道流处理结构
 
 int VDP_bytes(struct req *, enum vdp_action act, const void *ptr, ssize_t len);
 void VDP_push(struct req *, vdp_bytes *func, void *priv, int bottom,

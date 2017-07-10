@@ -119,7 +119,7 @@ tcp_handle(struct waited *w, enum wait_event ev, double now)
  * Reference a TCP pool given by {ip4, ip6} pair.  Create if it
  * doesn't exist already.
  */
-
+//创建tcp pool
 struct tcp_pool *
 VBT_Ref(const struct suckaddr *ip4, const struct suckaddr *ip6)
 {
