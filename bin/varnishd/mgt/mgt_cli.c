@@ -62,8 +62,8 @@ static const struct cli_cmd_desc *cmds[] = {
 
 static const int ncmds = sizeof cmds / sizeof cmds[0];
 
-static int		cli_i = -1, cli_o = -1;
-struct VCLS		*mgt_cls;
+static int		cli_i = -1, cli_o = -1;  //子进程和父进程交互的pipe  child_cli_in  child_cli_out
+struct VCLS		*mgt_cls;  //主要的控制台命令链表
 static const char	*secret_file;
 
 /*--------------------------------------------------------------------*/

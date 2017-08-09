@@ -363,7 +363,7 @@ MCF_ParamProtect(struct cli *cli, const char *args)
 /*--------------------------------------------------------------------*/
 
 void
-MCF_ParamSet(struct cli *cli, const char *param, const char *val)
+MCF_ParamSet(struct cli *cli, const char *param, const char *val)  //设置运行参数
 {
 	const struct parspec *pp;
 

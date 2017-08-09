@@ -183,7 +183,7 @@ VCLS_func_help_json(struct cli *cli, const char * const *av, void *priv)
 }
 
 /*--------------------------------------------------------------------
- * Look for a CLI command to execute
+ * Look for a CLI command to execute   查找一个命令处理
  */
 
 static void
@@ -292,7 +292,7 @@ cls_vlu2(void *priv, char * const *av)
 		}
 		if (clp == NULL &&
 		    cs->wildcard && cs->wildcard->auth <= cli->auth)
-			cls_dispatch(cli, cs->wildcard, av, na);
+			cls_dispatch(cli, cs->wildcard, av, na); //用在主进程不能处理，子进程处理的时候 cli_askchild
 
 	} while (0);
 
@@ -320,7 +320,7 @@ cls_vlu2(void *priv, char * const *av)
 }
 
 static int
-cls_vlu(void *priv, const char *p)
+cls_vlu(void *priv, const char *p)  //控制台行处理回调
 {
 	struct VCLS_fd *cfd;
 	struct cli *cli;
@@ -480,7 +480,7 @@ VCLS_AddFunc(struct VCLS *cs, unsigned auth, struct cli_proto *clp)
 	for (;clp->desc != NULL; clp++) {
 		clp->auth = auth;
 		if (!strcmp(clp->desc->request, "*")) {
-			cs->wildcard = clp;
+			cs->wildcard = clp;   //用在主进程不能处理，子进程处理的时候
 		} else {
 			i = 0;
 			VTAILQ_FOREACH(clp2, &cs->funcs, list) {

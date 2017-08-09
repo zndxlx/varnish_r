@@ -64,8 +64,8 @@ struct vsm_range {
 struct vsm_sc {
 	unsigned			magic;
 #define VSM_SC_MAGIC			0x8b83270d
-	char				*b;
-	ssize_t				len;
+	char				*b;  //初始地址
+	ssize_t				len;  //总长度
 	struct VSM_head			*head;
 	double				t0;
 	VTAILQ_HEAD(,vsm_range)		r_used;
@@ -143,7 +143,7 @@ VSM_common_new(void *p, ssize_t l)
 	sc->len = l;
 	sc->t0 = VTIM_mono();
 
-	sc->head = (void *)sc->b;
+	sc->head = (void *)sc->b;  //head 就在首地址
 	/* This should not be necessary, but just in case...*/
 	memset(sc->head, 0, sizeof *sc->head);
 	memcpy(sc->head->marker, VSM_HEAD_MARKER, sizeof sc->head->marker);
@@ -219,9 +219,9 @@ VSM_common_alloc(struct vsm_sc *sc, ssize_t size,
 		if (vr->len < l1)
 			continue;
 		if (vr->len <= l2) {
-			VTAILQ_REMOVE(&sc->r_free, vr, list);
+			VTAILQ_REMOVE(&sc->r_free, vr, list);   //空间正好合适
 		} else {
-			ALLOC_OBJ(vr3, VSM_RANGE_MAGIC);
+			ALLOC_OBJ(vr3, VSM_RANGE_MAGIC);  //空间太大，切一部分出来
 			AN(vr3);
 			vr3->off = vr->off;
 			vr3->len = l1;
@@ -271,11 +271,11 @@ VSM_common_alloc(struct vsm_sc *sc, ssize_t size,
 
 	if (vr3 != NULL) {
 		AZ(vr3->chunk->next);
-		vr3->chunk->next = vr->off;
+		vr3->chunk->next = vr->off;   //通过next将chunk构成链式结构
 	} else {
 		sc->head->first = vr->off;
 	}
-	sc->head->alloc_seq += 2;
+	sc->head->alloc_seq += 2;   //更新了统计
 	VWMB();
 	return (vr->ptr);
 }

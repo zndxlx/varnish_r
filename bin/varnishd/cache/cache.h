@@ -160,7 +160,7 @@ struct ws {
 };
 
 /*--------------------------------------------------------------------
- *
+ * http消息结构
  */
 
 struct http {
@@ -168,12 +168,12 @@ struct http {
 #define HTTP_MAGIC		0x6428b5c9
 
 	uint16_t		shd;		/* Size of hd space */
-	txt			*hd;
+	txt			*hd;   //head 
 	unsigned char		*hdf;
 #define HDF_FILTER		(1 << 0)	/* Filtered by Connection */
 
 	/* NB: ->nhd and below zeroed/initialized by http_Teardown */
-	uint16_t		nhd;		/* Next free hd */
+	uint16_t		nhd;		/* Next free hd head数目*/
 
 	enum VSL_tag_e		logtag;		/* Must be SLT_*Method */
 	struct vsl_log		*vsl;

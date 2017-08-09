@@ -57,6 +57,8 @@
 
 #include "vapi/voptget.h"
 
+//和varnishlog相关比较多，打印日志
+
 struct VUT VUT;
 
 static int vut_synopsis(const struct vopt_spec *);

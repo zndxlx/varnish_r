@@ -127,6 +127,6 @@ const struct hash_slinger hsl_slinger = {
 	.magic	=	SLINGER_MAGIC,
 	.name	=	"simple",
 	.start	=	hsl_start,
-	.lookup =	hsl_lookup,
+	.lookup =	hsl_lookup,   //插入查询都是这个函数
 	.deref	=	hsl_deref,
 };

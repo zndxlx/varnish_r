@@ -31,7 +31,7 @@
 struct vsc;
 struct vsb;
 
-struct VSM_data {
+struct VSM_data {  //共享内存读时候用
 	unsigned		magic;
 #define VSM_MAGIC		0x6e3bd69b
 
