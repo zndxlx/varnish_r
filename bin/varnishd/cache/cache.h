@@ -160,7 +160,7 @@ struct ws {
 };
 
 /*--------------------------------------------------------------------
- *
+ * http消息结构
  */
 
 struct http {
@@ -168,12 +168,12 @@ struct http {
 #define HTTP_MAGIC		0x6428b5c9
 
 	uint16_t		shd;		/* Size of hd space */
-	txt			*hd;
+	txt			*hd;   //head 
 	unsigned char		*hdf;
 #define HDF_FILTER		(1 << 0)	/* Filtered by Connection */
 
 	/* NB: ->nhd and below zeroed/initialized by http_Teardown */
-	uint16_t		nhd;		/* Next free hd */
+	uint16_t		nhd;		/* Next free hd head数目*/
 
 	enum VSL_tag_e		logtag;		/* Must be SLT_*Method */
 	struct vsl_log		*vsl;
@@ -302,7 +302,7 @@ enum task_prio {
 	TASK_QUEUE_BO,
 #define TASK_QUEUE_RESERVE	TASK_QUEUE_BO
 	TASK_QUEUE_REQ,
-	TASK_QUEUE_VCA,
+	TASK_QUEUE_VCA,  //vca varnish cache accept
 	TASK_QUEUE_END
 };
 
@@ -517,9 +517,9 @@ struct req {
 	unsigned		magic;
 #define REQ_MAGIC		0x2751aaa1
 
-	enum req_step		req_step;
+	enum req_step		req_step;  //tbl/steps.h
 	volatile enum req_body_state_e	req_body_status;
-	enum sess_close		doclose;
+	enum sess_close		doclose;  //关闭原因
 	int			restarts;
 	int			esi_level;
 	struct req		*top;	/* esi_level == 0 request */

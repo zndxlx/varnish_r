@@ -1,3 +1,9 @@
+
+libvgz 是就zlib 1.2.8的修改版本，接口没有变，头文件为vgz.h。可以通过学习zlib学习libvgz的使用
+
+主要使用文件是 cache_gzip.c
+
+
 This is a modified version of the ZLIB 1.2.8 data compression library.
 
 ZLIB DATA COMPRESSION LIBRARY

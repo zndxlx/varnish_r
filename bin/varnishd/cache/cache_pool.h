@@ -45,7 +45,11 @@ struct pool {
 
 	struct lock			mtx;
 	unsigned			nidle;
+<<<<<<< HEAD
 	struct taskhead			idle_queue;  //空闲线程
+=======
+	struct taskhead			idle_queue;  //idle工作线程
+>>>>>>> 8d8695f4a0bc3b5cb471fa9156473d14850f293d
 	struct taskhead			queues[TASK_QUEUE_END];
 	unsigned			nthr;  //线程数
 	unsigned			dry;

@@ -204,7 +204,7 @@ RFC2616_Ttl(struct busyobj *bo, double now, double *t_origin,
 }
 
 /*--------------------------------------------------------------------
- * Find out if the request can receive a gzip'ed response
+ * Find out if the request can receive a gzip'ed response  判断客户端是否支持gzip
  */
 
 unsigned

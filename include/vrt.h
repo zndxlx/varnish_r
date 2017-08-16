@@ -121,7 +121,7 @@ typedef void					VCL_VOID;
 
 /***********************************************************************
  * This is the composite argument we pass to compiled VCL and VRT
- * functions.
+ * functions.   vcl模块的上线文结构
  */
 
 struct vrt_ctx {

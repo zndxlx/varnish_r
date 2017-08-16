@@ -115,7 +115,7 @@ vbe_dir_getfd(struct worker *wrk, struct backend *bp, struct busyobj *bo)
 	VTCP_myname(vc->fd, abuf1, sizeof abuf1, pbuf1, sizeof pbuf1);
 	VTCP_hisname(vc->fd, abuf2, sizeof abuf2, pbuf2, sizeof pbuf2);
 	VSLb(bo->vsl, SLT_BackendOpen, "%d %s %s %s %s %s",
-	    vc->fd, bp->display_name, abuf2, pbuf2, abuf1, pbuf1);
+	    vc->fd, bp->display_name, abuf2, pbuf2, abuf1, pbuf1);  //日志 ，打开后端的请求
 
 	INIT_OBJ(bo->htc, HTTP_CONN_MAGIC);
 	bo->htc->priv = vc;

@@ -2,7 +2,7 @@
  * Copyright (c) 2007-2010 Varnish Software AS
  * All rights reserved.
  *
- * Author: Dag-Erling Smørgrav <des@des.no>
+ * Author: Dag-Erling Sm?rgrav <des@des.no>
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -52,7 +52,7 @@ VIN_N_Arg(const char *n_arg, char **name, char **dir, char **vsl)
 	/* First: determine the name */
 
 	if (n_arg == NULL || *n_arg == '\0') {
-		if (gethostname(nm, sizeof nm) != 0)
+		if (gethostname(nm, sizeof nm) != 0)  //使用主机名作为默认目录
 			return (-1);
 	} else if (strlen(n_arg) >= sizeof nm) {
 		/* preliminary length check to avoid overflowing nm */
@@ -64,9 +64,9 @@ VIN_N_Arg(const char *n_arg, char **name, char **dir, char **vsl)
 
 	/* Second: find the directory name */
 
-	if (*nm == '/')
+	if (*nm == '/')   
 		strcpy(dn, nm);
-	else if (strlen(VARNISH_STATE_DIR) + 1 + strlen(nm) >= sizeof dn){
+	else if (strlen(VARNISH_STATE_DIR) + 1 + strlen(nm) >= sizeof dn){ //VARNISH_STATE_DIR是编译时候指定的
 		/* preliminary length check to avoid overflowing dm */
 		errno = ENAMETOOLONG;
 		return (-1);

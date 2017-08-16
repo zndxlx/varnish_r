@@ -285,7 +285,7 @@ vca_pace_good(void)
 /*--------------------------------------------------------------------
  * The pool-task for a newly accepted session
  *
- * Called from assigned worker thread
+ * Called from assigned worker thread  pool-task收到数据后开始创建上下文
  */
 
 static void __match_proto__(task_func_t)
@@ -356,7 +356,7 @@ vca_make_session(struct worker *wrk, void *arg)
 	VTCP_name(sa, laddr, sizeof laddr, lport, sizeof lport);
 
 	VSL(SLT_Begin, sp->vxid, "sess 0 %s",
-	    wa->acceptlsock->transport->name);
+	    wa->acceptlsock->transport->name);  //打印共享内存日志
 	VSL(SLT_SessOpen, sp->vxid, "%s %s %s %s %s %.6f %d",
 	    raddr, rport, wa->acceptlsock->name, laddr, lport,
 	    sp->t_open, sp->fd);

@@ -56,8 +56,8 @@
 
 #define PAN_CLASS "Panic"
 
-static void *mgt_vsm_p;
-static ssize_t mgt_vsm_l;
+static void *mgt_vsm_p;  //共享内存文件打开的指针
+static ssize_t mgt_vsm_l;  //共享内存文件打开的大小  mgt_shm_size获取
 
 /*--------------------------------------------------------------------
  * Use a bogo-VSM to hold master-copies of the VSM chunks the master
@@ -73,13 +73,13 @@ mgt_SHM_static_alloc(const void *ptr, ssize_t size,
 {
 	void *p;
 
-	p = VSM_common_alloc(static_vsm, size, class, type, ident);
+	p = VSM_common_alloc(static_vsm, size, class, type, ident); //申请一块共享内存
 	AN(p);
-	memcpy(p, ptr, size);
+	memcpy(p, ptr, size);  //把数据拷贝到静态内存
 	if (heritage.vsm != NULL) {
 		p = VSM_common_alloc(heritage.vsm, size, class, type, ident);
 		AN(p);
-		memcpy(p, ptr, size);
+		memcpy(p, ptr, size);  //如果有共享内存，拷贝到共享内存
 	}
 }
 
@@ -92,7 +92,7 @@ mgt_SHM_static_alloc(const void *ptr, ssize_t size,
  */
 
 static int
-vsm_n_check(void)
+vsm_n_check(void)  //对共享内存VSM_FILENAME进行安全检测  ，一个文件应该不能被两个varnish使用
 {
 	int fd, i;
 	struct stat st;
@@ -175,7 +175,7 @@ mgt_shm_size(void)
 {
 	size_t size, ps;
 
-	size = mgt_param.vsl_space + mgt_param.vsm_space;
+	size = mgt_param.vsl_space + mgt_param.vsm_space;  //一个保存日志，一个保存客户端登录的信息
 	ps = getpagesize();
 	size = RUP2(size, ps);
 	return (size);
@@ -233,12 +233,12 @@ mgt_SHM_Create(void)
 	/* This may or may not work */
 	(void)mlock(p, size);
 
-	heritage.vsm = VSM_common_new(p, size);
+	heritage.vsm = VSM_common_new(p, size);  //重要，初始化heritage.vsm
 
-	VSM_common_copy(heritage.vsm, static_vsm);
+	VSM_common_copy(heritage.vsm, static_vsm);  //静态内存的拷贝到了共享内存中
 
 	heritage.param = VSM_common_alloc(heritage.vsm,
-	    sizeof *heritage.param, VSM_CLASS_PARAM, "", "");
+	    sizeof *heritage.param, VSM_CLASS_PARAM, "", "");  //给param在共享内存中分配内存
 	AN(heritage.param);
 	*heritage.param = mgt_param;
 
@@ -249,7 +249,7 @@ mgt_SHM_Create(void)
 
 	/* Copy management counters to shm and update pointer */
 	VSC_C_mgt = VSM_common_alloc(heritage.vsm,
-	    sizeof *VSC_C_mgt, VSC_CLASS, VSC_type_mgt, "");
+	    sizeof *VSC_C_mgt, VSC_CLASS, VSC_type_mgt, "");  //共享内存统计数据
 	AN(VSC_C_mgt);
 	*VSC_C_mgt = static_VSC_C_mgt;
 

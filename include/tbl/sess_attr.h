@@ -29,7 +29,7 @@
  * memory.  This stuff implements "small pointers", 16 bit offsets into
  * the session workspace, for these bits.
  */
-
+//session 属性
 /*lint -save -e525 -e539 */
 
 //        upper           lower         type		    len

@@ -58,7 +58,7 @@ struct vmod {
 	char			*nm;
 	char			*path;
 	char			*backup;
-	void			*hdl;
+	void			*hdl; //dlopen打开句柄
 	const void		*funcs;
 	int			funclen;
 	const char		*abi;

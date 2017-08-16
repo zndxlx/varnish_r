@@ -44,7 +44,7 @@
 pthread_t		cli_thread;
 static struct lock	cli_mtx;
 static int		add_check;
-static struct VCLS	*cls;
+static struct VCLS	*cls;  //控制台
 
 /*
  * The CLI commandlist is split in three:

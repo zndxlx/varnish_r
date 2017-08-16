@@ -155,7 +155,7 @@ WS_Alloc(struct ws *ws, unsigned bytes)
 	char *r;
 
 	WS_Assert(ws);
-	bytes = PRNDUP(bytes);
+	bytes = PRNDUP(bytes);  //取整字节
 
 	assert(ws->r == NULL);
 	if (ws->f + bytes > ws->e) {
@@ -169,6 +169,7 @@ WS_Alloc(struct ws *ws, unsigned bytes)
 	return (r);
 }
 
+//将str指向的内存拷贝进ws
 void *
 WS_Copy(struct ws *ws, const void *str, int len)
 {

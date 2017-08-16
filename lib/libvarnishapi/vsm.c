@@ -256,7 +256,7 @@ VSM_Open(struct VSM_data *vd)
 		return (vsm_diag(vd, "Not a VSM file %s", vd->fname));
 	}
 
-	if (!vd->N_opt && slh.alloc_seq == 0) {
+	if (!vd->N_opt && slh.alloc_seq == 0) {  //通过alloc_seq判断是否是废弃的内存文件
 		closefd(&vd->vsm_fd);
 		return (vsm_diag(vd,
 		    "Abandoned VSM file (Varnish not running?) %s",
@@ -359,11 +359,11 @@ VSM__iter0(const struct VSM_data *vd, struct VSM_fantom *vf)
 
 	memset(vf, 0, sizeof *vf);
 }
-
+//重要，共享内存中一个一个迭代
 int
 VSM__itern(const struct VSM_data *vd, struct VSM_fantom *vf)
 {
-	struct VSM_chunk *c = NULL;
+	struct VSM_chunk *c = NULL;  //主要要定位chunk
 
 	CHECK_OBJ_NOTNULL(vd, VSM_MAGIC);
 	AN(vf);
@@ -380,7 +380,7 @@ VSM__itern(const struct VSM_data *vd, struct VSM_fantom *vf)
 			return (0); /* free'd during iteration */
 		if (vf->chunk->next == 0)
 			return (0); /* last */
-		c = (struct VSM_chunk *)(void*)(vd->b + vf->chunk->next);
+		c = (struct VSM_chunk *)(void*)(vd->b + vf->chunk->next);  //chunk 是通过next连接的
 		assert(c != vf->chunk);
 	} else if (vd->head->first == 0) {
 		return (0);	/* empty vsm */

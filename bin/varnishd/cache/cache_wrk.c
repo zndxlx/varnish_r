@@ -47,7 +47,7 @@ static void Pool_Work_Thread(struct pool *pp, struct worker *wrk);
  * Create and start a back-ground thread which as its own worker and
  * session data structures;
  */
-
+//起一个线程处理任务
 struct bgthread {
 	unsigned	magic;
 #define BGTHREAD_MAGIC	0x23b5152b
@@ -57,7 +57,7 @@ struct bgthread {
 };
 
 static void *
-wrk_bgthread(void *arg)
+wrk_bgthread(void *arg)  
 {
 	struct bgthread *bt;
 	struct worker wrk;
@@ -87,9 +87,14 @@ WRK_BgThread(pthread_t *thr, const char *name, bgthread_t *func, void *priv)
 	AZ(pthread_create(thr, NULL, wrk_bgthread, bt));
 }
 
+<<<<<<< HEAD
 //工作线程创建
 /*--------------------------------------------------------------------*/ 
 
+=======
+/*--------------------------------------------------------------------*/
+//起个工作线程
+>>>>>>> 8d8695f4a0bc3b5cb471fa9156473d14850f293d
 static void
 WRK_Thread(struct pool *qp, size_t stacksize, unsigned thread_workspace)
 {
@@ -297,7 +302,7 @@ pool_kiss_of_death(struct worker *wrk, void *priv)
 /*--------------------------------------------------------------------
  * This is the work function for worker threads in the pool.工作线程主循环
  */
-
+//工作线程
 static void
 Pool_Work_Thread(struct pool *pp, struct worker *wrk)
 {
