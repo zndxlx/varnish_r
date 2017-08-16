@@ -38,7 +38,7 @@
 
 #include "vtim.h"
 
-struct memitem {
+struct memitem {  
 	unsigned			magic;
 #define MEMITEM_MAGIC			0x42e55401
 	unsigned			size;
@@ -58,7 +58,7 @@ struct mempool {
 	volatile struct poolparam	*param;
 	volatile unsigned		*cur_size;
 	uint64_t			live;
-	struct VSC_C_mempool		*vsc;
+	struct VSC_C_mempool		*vsc;  
 	unsigned			n_pool;
 	pthread_t			thread;
 	double				t_now;

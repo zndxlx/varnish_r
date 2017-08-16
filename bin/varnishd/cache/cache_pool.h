@@ -37,7 +37,7 @@ struct pool {
 	unsigned			magic;
 #define POOL_MAGIC			0x606658fa
 	VTAILQ_ENTRY(pool)		list;
-	VTAILQ_HEAD(,poolsock)		poolsocks;
+	VTAILQ_HEAD(,poolsock)		poolsocks;  //监听的地址和处理函数, 支持多个地址
 
 	int				die;
 	pthread_cond_t			herder_cond;

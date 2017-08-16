@@ -27,7 +27,7 @@
  * SUCH DAMAGE.
  *
  * This source file has the various trickery surrounding the accept/listen
- * sockets.
+ * sockets.  子进程接受连接的处理
  *
  */
 
@@ -513,7 +513,7 @@ VCA_DestroyPool(struct pool *pp)
 }
 
 /*--------------------------------------------------------------------*/
-//开始监听http服务地址
+//开始监听http服务地址  调试启动时候才有用
 static void *
 vca_acct(void *arg)
 {

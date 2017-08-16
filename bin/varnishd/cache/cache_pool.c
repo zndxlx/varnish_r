@@ -57,7 +57,7 @@ pool_sumstat(const struct dstat *src)
 
 	Lck_AssertHeld(&wstat_mtx);
 #define L0(n)
-#define L1(n) (VSC_C_main->n += src->n)
+#define L1(n) (VSC_C_main->n += src->n)  //更新统计数据
 #define VSC_FF(n,t,l,s,f,v,d,e)	L##l(n);
 #include "tbl/vsc_f_main.h"
 #undef L0
@@ -183,7 +183,7 @@ pool_mkpool(unsigned pool_no)
  * NB: CLI when parameters change and an appropriate call-out table
  * NB: be maintained for params which require action.
  */
-
+//线程池维护线程，控制线程池数目
 static void *
 pool_poolherder(void *priv)
 {
@@ -197,7 +197,7 @@ pool_poolherder(void *priv)
 
 	nwq = 0;
 	while (1) {
-		if (nwq < cache_param->wthread_pools) {
+		if (nwq < cache_param->wthread_pools) {  //线程池少了
 			pp = pool_mkpool(nwq);
 			if (pp != NULL) {
 				Lck_Lock(&pool_mtx);
@@ -208,7 +208,7 @@ pool_poolherder(void *priv)
 				continue;
 			}
 		} else if (nwq > cache_param->wthread_pools &&
-				DO_DEBUG(DBG_DROP_POOLS)) {
+				DO_DEBUG(DBG_DROP_POOLS)) {  ////线程池多了
 			Lck_Lock(&pool_mtx);
 			pp = VTAILQ_FIRST(&pools);
 			AN(pp);
@@ -228,7 +228,7 @@ pool_poolherder(void *priv)
 		u = 0;
 		ppx = NULL;
 		Lck_Lock(&pool_mtx);
-		VTAILQ_FOREACH(pp, &pools, list) {
+		VTAILQ_FOREACH(pp, &pools, list) {  //回收不用的线程池
 			if (pp->die && pp->nthr == 0)
 				ppx = pp;
 			u += pp->lqueue;
