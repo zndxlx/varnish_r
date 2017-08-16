@@ -43,7 +43,7 @@ VSC_DO(MGT, mgt, VSC_type_mgt, "MANAGEMENT PROCESS COUNTERS (MGT.*)")
   #undef VSC_DO_MGT
 VSC_DONE(MGT, mgt, VSC_type_mgt)
 
-VSC_DO(MEMPOOL, mempool, VSC_type_mempool, "MEMORY POOL COUNTERS (MEMPOOL.*)")
+VSC_DO(MEMPOOL, mempool, VSC_type_mempool, "MEMORY POOL COUNTERS (MEMPOOL.*)")  //vsc_c_mempool
   #define VSC_DO_MEMPOOL
     #define VSC_FF VSC_F
     #include "tbl/vsc_fields.h"

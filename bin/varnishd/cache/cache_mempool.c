@@ -75,7 +75,7 @@ mpl_alloc(const struct mempool *mpl)
 	struct memitem *mi;
 
 	CHECK_OBJ_NOTNULL(mpl, MEMPOOL_MAGIC);
-	tsz = *mpl->cur_size;
+	tsz = *mpl->cur_size;  //
 	mi = calloc(tsz, 1);
 	AN(mi);
 	mi->magic = MEMITEM_MAGIC;
@@ -237,7 +237,7 @@ MPL_New(const char *name,
 	Lck_New(&mpl->mtx, lck_mempool);
 	/* XXX: prealloc min_pool */
 	mpl->vsc = VSM_Alloc(sizeof *mpl->vsc,
-	    VSC_CLASS, VSC_type_mempool, mpl->name + 4);
+	    VSC_CLASS, VSC_type_mempool, mpl->name + 4);  //统计信息
 	AN(mpl->vsc);
 	AZ(pthread_create(&mpl->thread, NULL, mpl_guard, mpl));
 	AZ(pthread_detach(mpl->thread));
@@ -295,11 +295,11 @@ MPL_Get(struct mempool *mpl, unsigned *size)
 		}
 	} while (mi == NULL);
 
-	Lck_Unlock(&mpl->mtx);
+	Lck_Unlock(&mpl->mtx);   //可能找到了一个大于mpl->cur_size的
 
-	if (mi == NULL)
-		mi = mpl_alloc(mpl);
-	*size = mi->size - sizeof *mi;
+	if (mi == NULL)            
+		mi = mpl_alloc(mpl);   //没有找到，申请一个 mpl->cur_size的 
+	*size = mi->size - sizeof *mi;   //cur_size包括 mi的大小
 
 	CHECK_OBJ_NOTNULL(mi, MEMITEM_MAGIC);
 	/* Throw away sizeof info for FlexeLint: */

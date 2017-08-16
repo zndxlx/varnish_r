@@ -45,9 +45,9 @@ struct pool {
 
 	struct lock			mtx;
 	unsigned			nidle;
-	struct taskhead			idle_queue;
+	struct taskhead			idle_queue;  //空闲线程
 	struct taskhead			queues[TASK_QUEUE_END];
-	unsigned			nthr;
+	unsigned			nthr;  //线程数
 	unsigned			dry;
 	unsigned			lqueue;
 	uintmax_t			ndropped;

@@ -376,7 +376,7 @@ vca_make_session(struct worker *wrk, void *arg)
 	CHECK_OBJ_NOTNULL(req, REQ_MAGIC);
 	req->htc->rfd = &sp->fd;
 
-	SES_SetTransport(wrk, sp, req, wa->acceptlsock->transport);
+	SES_SetTransport(wrk, sp, req, wa->acceptlsock->transport);  //连接 HTTP1_transport
 }
 
 /*--------------------------------------------------------------------
@@ -386,7 +386,8 @@ vca_make_session(struct worker *wrk, void *arg)
  * we do so, otherwise we put the socket back on the "BACK" pool
  * and handle the new connection ourselves.
  */
-//接受一个连接
+//接受一个连接  一个线程池中有一个线程一直用来接受连接，接收到后再
+//vca_make_session丢给其他工作线程处理
 static void __match_proto__(task_func_t)
 vca_accept_task(struct worker *wrk, void *arg)
 {
