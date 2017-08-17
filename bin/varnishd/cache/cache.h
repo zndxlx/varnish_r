@@ -337,7 +337,7 @@ struct worker {
 	unsigned		seen_methods;
 	unsigned		handling;
 
-	uintptr_t		stack_start;
+	uintptr_t		stack_start;//能指定线程stack?
 	uintptr_t		stack_end;
 };
 
@@ -627,7 +627,7 @@ struct sess {
 
 	uint16_t		sattr[SA_LAST];
 	int			refcnt;
-	int			fd;
+	int			fd;  //和客户端的连接
 	uint32_t		vxid;
 
 	struct lock		mtx;

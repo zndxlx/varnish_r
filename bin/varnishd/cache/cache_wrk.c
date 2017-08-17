@@ -87,8 +87,14 @@ WRK_BgThread(pthread_t *thr, const char *name, bgthread_t *func, void *priv)
 	AZ(pthread_create(thr, NULL, wrk_bgthread, bt));
 }
 
+<<<<<<< HEAD
+//工作线程创建
+/*--------------------------------------------------------------------*/ 
+
+=======
 /*--------------------------------------------------------------------*/
 //起个工作线程
+>>>>>>> 8d8695f4a0bc3b5cb471fa9156473d14850f293d
 static void
 WRK_Thread(struct pool *qp, size_t stacksize, unsigned thread_workspace)
 {
@@ -294,7 +300,7 @@ pool_kiss_of_death(struct worker *wrk, void *priv)
 
 
 /*--------------------------------------------------------------------
- * This is the work function for worker threads in the pool.
+ * This is the work function for worker threads in the pool.工作线程主循环
  */
 //工作线程
 static void
@@ -319,7 +325,7 @@ Pool_Work_Thread(struct pool *pp, struct worker *wrk)
 		else
 			prio_lim = TASK_QUEUE_END;
 
-		for (i = 0; i < prio_lim; i++) {
+		for (i = 0; i < prio_lim; i++) {  //重任务队列里面取任务
 			tp = VTAILQ_FIRST(&pp->queues[i]);
 			if (tp != NULL) {
 				pp->lqueue--;
@@ -347,7 +353,7 @@ Pool_Work_Thread(struct pool *pp, struct worker *wrk)
 				wrk->lastused = VTIM_real();
 			wrk->task.func = NULL;
 			wrk->task.priv = wrk;
-			VTAILQ_INSERT_HEAD(&pp->idle_queue, &wrk->task, list);
+			VTAILQ_INSERT_HEAD(&pp->idle_queue, &wrk->task, list);  //插入空闲队列
 			pp->nidle++;
 			do {
 				i = Lck_CondWait(&wrk->cond, &pp->mtx,
@@ -364,7 +370,7 @@ Pool_Work_Thread(struct pool *pp, struct worker *wrk)
 		if (tp->func == pool_kiss_of_death)
 			break;
 
-		do {
+		do {  //执行任务
 			memset(&wrk->task, 0, sizeof wrk->task);
 			assert(wrk->pool == pp);
 			tp->func(wrk, tp->priv);
@@ -454,12 +460,12 @@ pool_breed(struct pool *qp)
  *
  * Idle threads are destroyed at a rate determined by wthread_destroy_delay
  *
- * XXX: probably need a lot more work.
+ * XXX: probably need a lot more work.   //维持线程数在指定范围cache_param->wthread_min
  *
  */
 
 void*
-pool_herder(void *priv)
+pool_herder(void *priv)  
 {
 	struct pool *pp;
 	struct pool_task *pt;

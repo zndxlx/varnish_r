@@ -165,7 +165,7 @@ pool_mkpool(unsigned pool_no)
 	for (i = 0; i < TASK_QUEUE_END; i++)
 		VTAILQ_INIT(&pp->queues[i]);
 	AZ(pthread_cond_init(&pp->herder_cond, NULL));
-	AZ(pthread_create(&pp->herder_thr, NULL, pool_herder, pp));
+	AZ(pthread_create(&pp->herder_thr, NULL, pool_herder, pp));//通过pool_herder创建线程池
 
 	while (VTAILQ_EMPTY(&pp->idle_queue))
 		(void)usleep(10000);

@@ -252,7 +252,7 @@ VSC_FF(req,			uint64_t, 0, 'c', 'i', info,
 #endif
 
 /**********************************************************************/
-#ifdef VSC_DO_MEMPOOL
+#ifdef VSC_DO_MEMPOOL   //vsc_c_mempool
 
 VSC_FF(live,			uint64_t, 0, 'g', 'i', debug,
     "In use",

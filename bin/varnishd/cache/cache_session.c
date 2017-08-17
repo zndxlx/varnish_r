@@ -64,7 +64,7 @@ SES_SetTransport(struct worker *wrk, struct sess *sp, struct req *req,
 
 	sp->sattr[SA_TRANSPORT] = xp->number;
 	req->transport = xp;
-	wrk->task.func = xp->new_session;
+	wrk->task.func = xp->new_session; //主要HTTP1_transport
 	wrk->task.priv = req;
 }
 
@@ -334,7 +334,7 @@ SES_New(struct pool *pp)
 	char *p, *e;
 
 	CHECK_OBJ_NOTNULL(pp, POOL_MAGIC);
-	sp = MPL_Get(pp->mpl_sess, &sz);
+	sp = MPL_Get(pp->mpl_sess, &sz);  //会在seesion内存池中申请current size大小内存
 	sp->magic = SESS_MAGIC;
 	sp->pool = pp;
 	sp->refcnt = 1;
@@ -589,7 +589,7 @@ SES_Rel(struct sess *sp)
  */
 
 void
-SES_NewPool(struct pool *pp, unsigned pool_no)
+SES_NewPool(struct pool *pp, unsigned pool_no)  //为什么放在session里面 ?
 {
 	char nb[8];
 
