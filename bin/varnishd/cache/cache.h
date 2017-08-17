@@ -950,7 +950,7 @@ void SES_Ref(struct sess *sp);
 void SES_Rel(struct sess *sp);
 int SES_Reschedule_Req(struct req *);
 
-enum htc_status_e {
+enum htc_status_e {  //http 连接状态
 	HTC_S_JUNK =		-5,
 	HTC_S_CLOSE =		-4,
 	HTC_S_TIMEOUT =		-3,

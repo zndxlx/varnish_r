@@ -222,7 +222,7 @@ HTC_RxPipeline(struct http_conn *htc, void *p)
 
 /*----------------------------------------------------------------------
  * Receive a request/packet/whatever, with timeouts
- *
+ *  收包处理函数
  * t0 is when we start
  * *t1 becomes time of first non-idle rx
  * *t2 becomes time of complete rx

@@ -938,7 +938,7 @@ vbf_stp_done(void)
 	WRONG("Just plain wrong");
 	NEEDLESS(return(F_STP_DONE));
 }
-
+//lixin: 后端拉取主函数
 static void __match_proto__(task_func_t)
 vbf_fetch_thread(struct worker *wrk, void *priv)
 {

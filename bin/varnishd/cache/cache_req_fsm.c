@@ -48,7 +48,7 @@
 #include "vcl.h"
 #include "vsha256.h"
 #include "vtim.h"
-
+//lixin:cache主逻辑 状态机
 /*--------------------------------------------------------------------
  * Handle "Expect:" and "Connection:" on incoming request
  */
@@ -84,7 +84,7 @@ cnt_transport(struct worker *wrk, struct req *req)
 	AZ(req->err_code);
 	req->ws_req = WS_Snapshot(req->ws);
 
-	req->doclose = http_DoConnection(req->http);
+	req->doclose = http_DoConnection(req->http);//lixin 根据connetion头判断是否需要关闭连接
 	if (req->doclose == SC_RX_BAD) {
 		(void)req->transport->minimal_response(req, 400);
 		return (REQ_FSM_DONE);

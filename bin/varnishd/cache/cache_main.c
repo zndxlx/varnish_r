@@ -68,7 +68,7 @@ THR_GetBusyobj(void)
 }
 
 void
-THR_SetRequest(const struct req *req)
+THR_SetRequest(const struct req *req)//线程私有变量
 {
 
 	AZ(pthread_setspecific(req_key, req));

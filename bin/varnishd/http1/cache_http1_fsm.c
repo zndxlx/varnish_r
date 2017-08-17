@@ -351,6 +351,8 @@ http1_req_cleanup(struct sess *sp, struct worker *wrk, struct req *req)
 /*----------------------------------------------------------------------
  */
 
+
+// lixin:session 主循环
 static void
 HTTP1_Session(struct worker *wrk, struct req *req)
 {
@@ -468,7 +470,7 @@ HTTP1_Session(struct worker *wrk, struct req *req)
 					return;
 				}
 			}
-			req->req_step = R_STP_TRANSPORT;
+			req->req_step = R_STP_TRANSPORT; //lixin 设置初始处理状态
 			http1_setstate(sp, H1PROC);
 		} else if (st == H1BUSY) {
 			CHECK_OBJ_NOTNULL(req->transport, TRANSPORT_MAGIC);
@@ -490,7 +492,7 @@ HTTP1_Session(struct worker *wrk, struct req *req)
 		} else if (st == H1PROC) {
 			req->task.func = http1_req;
 			req->task.priv = req;
-			if (CNT_Request(wrk, req) == REQ_FSM_DISEMBARK)
+			if (CNT_Request(wrk, req) == REQ_FSM_DISEMBARK)//lixin 进入处理状态机
 				return;
 			req->task.func = NULL;
 			req->task.priv = NULL;
